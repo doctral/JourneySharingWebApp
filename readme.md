@@ -1,11 +1,22 @@
-# updates from v1.1.7:
+# Main Features:
 
-## Step 1: Adding in flash
-* Demo working version
-* Install and configure connect-flash
-* add bootstrap alerts to header
+## Fancy Layout and User Interface
+* Designed the web pages using HTML, CSS, and Javascript
+* Added bootstrap component to make user interface fancy
 
-## Step 2: Refactoring the landing page
+## RESTful
+* Developed the backend using Node.JS, express
+* Designed routes for post and reviews using RESTful design pattern
+
+## NoSQL DATABASE
+* Used MongoDB to store information of post, user, and review
+
+## Authentication
+* Added authentication features to allow users to sign up, sign in, and logout
+* Post and Review can only be modified by the owner
+
+## Game for relax
+* Added two games just for fun
 
 
 
