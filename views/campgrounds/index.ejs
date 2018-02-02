@@ -1,0 +1,31 @@
+<% include ../partials/header%>
+
+<div class="container">
+    <header class="jumbotron">
+         <div class="container">
+              <h1>Welcome to the Journey Gallery</h1>
+              <p>Check the most visited tourist attraction and enjoy the stories behind it.</p>
+              <p>
+                  <a class="btn btn-primary btn-md" href="/photos/new">Share a new Journey</a>
+              </p>
+         </div> 
+    </header>
+
+    <div class="row text-center" style="display:flex; flex-wrap:wrap;">
+        <% yelpcamps.forEach(function(camp){ %>
+          <div class="col-md-4 col-sm-12">
+              <div class="thumbnail">
+                  <a href="/photos/<%=camp._id%>"><img id="index_img" src="<%=camp.image%>"></a>
+
+                  <div class="caption">
+                      <h4><%=camp.name%></h4>
+                  </div>
+              </div>
+              
+          </div>
+        <% }); %>
+    </div>
+
+</div>
+
+<% include ../partials/footer%>

@@ -1,0 +1,104 @@
+<% include ../partials/header%>
+
+<div class="container">
+       <div class="row">
+              <div class="col-md-3">
+                     <p class="lead"><%=campground.name%></p>
+                     <div class="list-group">
+                            <li class="list-group-item">Location: <%=campground.location%></li>
+                            <li class="list-group-item">Price: $<%=campground.price%>/day</li>
+                     </div>
+                     <div id="map"></div>
+                     <script>
+                            function initMap() {
+                            var map = new google.maps.Map(document.getElementById('map'), {
+                            center: {lat: -34.397, lng: 150.644},
+                            zoom: 12
+                            });
+                            var infoWindow = new google.maps.InfoWindow({map: map});
+
+                            // Try HTML5 geolocation.
+                            if (navigator.geolocation) {
+                               navigator.geolocation.getCurrentPosition(function(position) {
+                                 var pos = {
+                                     lat: position.coords.latitude,
+                                     lng: position.coords.longitude
+                                 };
+                                 infoWindow.setPosition(pos);
+                                 infoWindow.setContent('Your Current Location');
+                                 map.setCenter(pos);
+                               }, function() {
+                                 handleLocationError(true, infoWindow, map.getCenter());
+                               });
+                             } else {
+                               // Browser doesn't support Geolocation
+                               handleLocationError(false, infoWindow, map.getCenter());
+                             }
+                           }
+              
+                           function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                             infoWindow.setPosition(pos);
+                             infoWindow.setContent(browserHasGeolocation ?
+                                            'Error: The Geolocation service failed.' :
+                                            'Error: Your browser doesn\'t support geolocation.');
+                           }
+                  </script>
+                  <script async defer
+                     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAS3TnMMn5hA7USpKDjoGo7N4Xqn3VS9Y&callback=initMap">
+                  </script>
+                                   
+              </div>
+              <div class="col-md-9">
+                     <div class="thumbnail">
+                            <img class="img-responsive" src="<%=campground.image%>">
+                            <div class="caption-full">
+                                   <h4 class="pull-right">$<%=campground.price%>/day</h4>
+                                   <h4><a href=""><%= campground.name%></a></h4>
+                                   <p><%= campground.descript%></p>
+                                   <div>
+                                          <p>
+                                                 <em>Created By: <%=campground.author.username%></em>
+                                          </p>
+                                          Image Source:<a href="<%=campground.image%>"><%=campground.image%></a>
+                                   </div>
+
+                                   <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
+                                          <a class="btn btn-sm btn-info" href="/photos/<%=campground._id%>/edit">Edit this post</a>
+                                          <form id="delete-form" class="pull-right" action="/photos/<%=campground._id%>?_method=DELETE" method="POST">
+                                                 <button class="btn btn-sm btn-danger">Delete</button>
+                                          </form>
+                                   <% } %> 
+                            </div>
+                     </div>
+                     <hr>
+                     <div class="well">
+                            <div class="text-right">
+                                   <a class="btn btn-md btn-primary" href="/photos/<%=campground._id%>/comments/new">Add New Comment</a>
+                            </div>
+                            
+                            <% campground.comments.forEach(function(comment){ %>
+                                   <div class=row>
+                                          <div class="col-md-12">
+                                                 <strong><%= comment.author.username %></strong>
+                                                 <span class="pull-right"><%=comment.date%></span>
+                                                 <p>
+                                                        <%= comment.text %>
+                                                 </p>
+                                                 <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                                                 <a class="btn btn-warning btn-xs" href="/photos/<%=campground._id%>/comments/<%=comment._id%>/edit">Edit</a>
+                                                 <form id="comment-delete-form" class="pull-right" action="/photos/<%=campground._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                                 </form>
+                                                 <% } %>
+                                          </div>
+                                   </div>
+                            <% }) %>
+                            
+                     </div>
+              </div>
+       </div>
+</div>
+
+
+
+<% include ../partials/footer%>

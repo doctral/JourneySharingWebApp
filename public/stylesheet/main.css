@@ -1,0 +1,49 @@
+.thumbnail img{
+    width: 100%;
+}
+body{
+    margin:0;
+    background-color: rgba(184,134,11, 0.1);
+}
+#index_img{
+    height:400px;
+}
+
+.thumbnail{
+    padding:0px;
+}
+
+.thumbnail .caption-full{
+    padding: 9px;
+}
+
+#signup_img{
+    margin:0 auto;
+    width:100%;
+}
+
+#form-delete{
+    display: inline;
+}
+
+.footer{
+   position:relative;
+   width: 500px;
+   margin:0 auto;
+   text-align: center;
+   color:black;
+   left:0;
+   bottom: 0;
+   right:0;
+   padding-top:10px;
+   padding-bottom:10px; 
+}
+
+.description{
+    height: 100px;
+}
+#map{
+    height:400px;
+    width:100%;
+}
+
