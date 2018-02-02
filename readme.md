@@ -18,5 +18,8 @@
 ## Game for relax
 * Added two games just for fun
 
+# Deployment
+[Fei's Cafe](https://feiscafe.herokuapp.com/)
+
 
 
